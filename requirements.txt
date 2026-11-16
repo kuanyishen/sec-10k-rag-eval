@@ -1,0 +1,12 @@
+requests
+pyyaml
+numpy
+pandas
+beautifulsoup4
+lxml
+rank-bm25
+anthropic
+google-genai
+sentence-transformers
+matplotlib
+pytest
