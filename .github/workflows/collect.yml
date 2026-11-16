@@ -10,6 +10,8 @@ jobs:
         with: {python-version: "3.12"}
       - run: pip install requests pyyaml
       - run: PYTHONPATH=src python -m rag_eval.edgar
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
       - name: Commit filings and facts
         run: |
           git config user.name "Sky Shen"

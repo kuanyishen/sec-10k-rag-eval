@@ -16,7 +16,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "data" / "raw"
-UA = os.environ.get("SEC_USER_AGENT", "sec-10k-rag-eval research project (github.com/kuanyishen/sec-10k-rag-eval)")
+# The SEC rejects anonymous clients (403). Set SEC_USER_AGENT to "Your Name contact@example.com".
+UA = os.environ.get("SEC_USER_AGENT") or "sec-10k-rag-eval research project (github.com/kuanyishen/sec-10k-rag-eval)"
 
 
 def get(url: str, *, tries: int = 4) -> requests.Response:
@@ -28,6 +29,9 @@ def get(url: str, *, tries: int = 4) -> requests.Response:
         if r.status_code in (403, 429, 503) and i < tries - 1:
             time.sleep(2 ** (i + 1))
             continue
+        if r.status_code == 403:
+            raise SystemExit("SEC returned 403: set the SEC_USER_AGENT secret to 'Your Name your-contact@example.com' "
+                             "(the SEC requires a real contact in the User-Agent).")
         r.raise_for_status()
     raise RuntimeError(url)
 
