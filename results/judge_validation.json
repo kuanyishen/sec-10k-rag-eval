@@ -1,0 +1,33 @@
+{
+ "judge_model": "claude-haiku-5-5",
+ "check_model": "claude-sonnet-5-5",
+ "numeric_correct_vs_truth": {
+  "n": 180,
+  "accuracy": 0.9555555555555556,
+  "kappa": 0.9110122358175752,
+  "false_accept_rate": 0.0,
+  "false_reject_rate": 0.08080808080808081,
+  "tp": 91
+ },
+ "numeric_supported_vs_truth": {
+  "n": 116,
+  "accuracy": 0.9396551724137931,
+  "kappa": -0.014999999999998636,
+  "false_accept_rate": 1.0,
+  "false_reject_rate": 0.00909090909090909,
+  "tp": 109
+ },
+ "corrupted_answers_rejected": {
+  "n": 59,
+  "rejected": 19
+ },
+ "second_opinion_correct_agreement": {
+  "n": 60,
+  "accuracy": 1.0,
+  "kappa": 1.0,
+  "false_accept_rate": 0.0,
+  "false_reject_rate": 0.0,
+  "tp": 57
+ },
+ "unparsed": 2
+}
