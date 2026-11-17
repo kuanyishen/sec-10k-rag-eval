@@ -43,7 +43,7 @@ def main():
     rng = random.Random(0)
     items = [("text", r, r["answer"], J.JUDGE_MODEL) for r in rows if r["type"] == "text"]
     # validation 1: numeric answers, where correctness and support are known programmatically
-    num = [r for r in rows if r["type"] == "numeric" and r["arm"] in ("rerank_k5", "bm25_k5", "closed_book") and not r["answer"].startswith("ERROR")]
+    num = [r for r in rows if r["type"] == "numeric" and r["arm"] in ("dense_k5", "bm25_k5", "closed_book") and not r["answer"].startswith("ERROR")]
     rng.shuffle(num)
     val = num[:180]
     items += [("val_numeric", r, r["answer"], J.JUDGE_MODEL) for r in val]
@@ -55,7 +55,7 @@ def main():
             probes.append(("val_corrupt", r, c, J.JUDGE_MODEL))
     items += probes[:60]
     # second opinion: a stronger model re-judges a sample of the primary arm's text answers
-    prim = [r for r in rows if r["type"] == "text" and r["arm"] == "rerank_k5"]
+    prim = [r for r in rows if r["type"] == "text" and r["arm"] == "dense_k5"]
     items += [("second_opinion", r, r["answer"], J.CHECK_MODEL) for r in rng.sample(prim, min(60, len(prim)))]
 
     with ThreadPoolExecutor(8) as ex:

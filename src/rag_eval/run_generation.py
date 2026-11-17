@@ -19,14 +19,15 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "generation"
 CFG = ChunkCfg(400, 50, True)          # the primary chunking, fixed before the experiment
 GEN_MODEL = "claude-haiku-5-5"
-ARMS = {
+ARMS = {  # chosen after the retrieval experiment showed dense retrieval was strongest
     "closed_book": {"ret": None},
     "bm25_k5": {"ret": "bm25", "k": 5},
     "hybrid_k5": {"ret": "hybrid", "k": 5},
-    "rerank_k3": {"ret": "hybrid_rerank", "k": 3},
-    "rerank_k5": {"ret": "hybrid_rerank", "k": 5},
-    "rerank_k10": {"ret": "hybrid_rerank", "k": 10},
-    "oracle_k5": {"ret": "hybrid_rerank", "k": 5, "oracle": True},
+    "hybrid_rerank_k5": {"ret": "hybrid_rerank", "k": 5},
+    "dense_k3": {"ret": "dense", "k": 3},
+    "dense_k5": {"ret": "dense", "k": 5},
+    "dense_k10": {"ret": "dense", "k": 10},
+    "oracle_k5": {"ret": "dense", "k": 5, "oracle": True},
 }
 
 
@@ -47,14 +48,14 @@ def main():
     chunks = build(CFG)
     by_id = {c.chunk_id: c for c in chunks}
     runs = {r: {x["id"]: x["top"] for x in json.loads((ROOT / "results" / "retrieval" / f"{CFG.name}__{r}.json").read_text())}
-            for r in ("bm25", "hybrid", "hybrid_rerank")}
+            for r in ("bm25", "dense", "hybrid", "hybrid_rerank")}
     # an answer-bearing chunk per answerable question: prefer one the reranker ranked, else the first in the filing
     hit_ids = {}
     for q in qs:
         if q["type"] == "unanswerable":
             continue
         hits = [c.chunk_id for c in chunks if M.is_hit(c.ticker, c.body, q)]
-        ranked = [i for i in runs["hybrid_rerank"].get(q["id"], []) if i in set(hits)]
+        ranked = [i for i in runs["dense"].get(q["id"], []) if i in set(hits)]
         hit_ids[q["id"]] = (ranked or hits or [None])[0]
 
     def answer(job):
