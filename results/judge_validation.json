@@ -17,10 +17,6 @@
   "false_reject_rate": 0.00909090909090909,
   "tp": 109
  },
- "corrupted_answers_rejected": {
-  "n": 59,
-  "rejected": 19
- },
  "second_opinion_correct_agreement": {
   "n": 60,
   "accuracy": 1.0,
@@ -29,5 +25,13 @@
   "false_reject_rate": 0.0,
   "tp": 57
  },
- "unparsed": 2
+ "unparsed": 2,
+ "corrupted_answers_rejected_v1_buggy_probe": {
+  "n": 59,
+  "rejected": 19
+ },
+ "corrupted_answers_rejected": {
+  "n": 60,
+  "rejected": 60
+ }
 }
