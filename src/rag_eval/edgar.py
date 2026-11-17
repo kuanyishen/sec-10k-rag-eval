@@ -17,7 +17,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "data" / "raw"
 # The SEC rejects anonymous clients (403). Set SEC_USER_AGENT to "Your Name contact@example.com".
-UA = os.environ.get("SEC_USER_AGENT") or "sec-10k-rag-eval research project (github.com/kuanyishen/sec-10k-rag-eval)"
+def _clean(ua: str) -> str:
+    """Collapse whitespace/newlines that a pasted secret may carry (they make the header invalid)."""
+    return " ".join(ua.split())
+
+
+UA = _clean(os.environ.get("SEC_USER_AGENT", "")) or "sec-10k-rag-eval research project (github.com/kuanyishen/sec-10k-rag-eval)"
 
 
 def get(url: str, *, tries: int = 4) -> requests.Response:

@@ -31,3 +31,7 @@ def test_extract_facts_keeps_only_this_filing_and_first_matching_concept():
     assert out["revenue"]["concept"] == "Revenues" and len(out["revenue"]["rows"]) == 2
     assert "net_income" not in out
     assert edgar.extract_facts(cf, "other", {"revenue": ["Revenues"]}) == {}
+
+
+def test_user_agent_cleaning_removes_newlines_and_edge_whitespace():
+    assert edgar._clean("  Sky Shen \n a@b.com \r\n") == "Sky Shen a@b.com"
