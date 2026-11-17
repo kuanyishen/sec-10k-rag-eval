@@ -1,0 +1,17 @@
+{
+ "_note": "Manual labels for every miss of the dense_k5 arm, from reading each answer and the filing excerpts.",
+ "num-WMT-net_income-prior": ["definition", "Gave consolidated net income (incl. noncontrolling interests); the SEC fact is net income attributable to Walmart, which the answer also mentions."],
+ "num-WMT-stockholders_equity-current": ["definition", "Gave total equity incl. noncontrolling interest; the SEC fact excludes it (the answer also states the excluded figure)."],
+ "num-WMT-stockholders_equity-prior": ["definition", "Same as above, prior year."],
+ "num-XOM-revenue-current": ["definition", "Chose 'sales and other operating revenue'; the SEC fact is total revenues and other income, which the answer also states."],
+ "num-XOM-revenue-prior": ["definition", "Same choice of revenue line, prior year."],
+ "num-XOM-rd_expense-current": ["grader", "Model gave $1,228M from the filing's table; the SEC structured fact is rounded to $1.2B, so exact-match marked it wrong."],
+ "num-XOM-rd_expense-prior": ["grader", "Model gave $987M from the filing; the SEC fact is rounded to $1.0B."],
+ "num-XOM-cash-prior": ["definition", "Included restricted cash ($23,187M); the SEC fact is cash and cash equivalents only ($23,029M), which the answer also states."],
+ "num-TSLA-net_income-current": ["definition", "Gave net income incl. noncontrolling interests; the SEC fact is attributable to common stockholders (also stated in the answer)."],
+ "num-TSLA-net_income-prior": ["definition", "Same, prior year."],
+ "txt-AAPL-00016": ["retrieval", "Answer passage not in the top 5; model said NOT_FOUND."],
+ "txt-PFE-00197": ["retrieval", "Answer passage not in the top 5; model said NOT_FOUND (it saw a related list but no statement calling them critical)."],
+ "txt-NKE-00131": ["retrieval", "Answer passage not in the top 5; model said NOT_FOUND."],
+ "txt-NKE-00264": ["retrieval", "Answer passage not in the top 5; model answered with the broader 'sales-related reserves' figure and said the narrower one was not in the excerpts."]
+}
