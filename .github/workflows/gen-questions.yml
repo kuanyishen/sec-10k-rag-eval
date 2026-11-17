@@ -1,0 +1,22 @@
+name: gen-questions
+on: {workflow_dispatch: {}}
+permissions: {contents: write}
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install anthropic pyyaml lxml
+      - run: PYTHONPATH=src python -m rag_eval.gen_text_questions
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Commit questions
+        run: |
+          git config user.name "Sky Shen"
+          git config user.email "noreply@github.com"
+          git add data/questions
+          git commit -m "Generate text question candidates" || echo "nothing new"
+          git pull --rebase
+          git push
