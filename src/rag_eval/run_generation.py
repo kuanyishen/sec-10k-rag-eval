@@ -42,6 +42,23 @@ def contexts_for(arm: dict, q: dict, runs: dict, chunks_by_id: dict, hit_ids: di
     return [chunks_by_id[i] for i in ids]
 
 
+def fill_missing(missing: list[dict], runs: dict, chunks) -> None:
+    """Questions absent from the retrieval experiment (the unanswerable set) are retrieved here,
+    with the same retrievers and the cached chunk embeddings."""
+    from .retrieve import BM25, Dense, Reranker, rrf
+    from .run_retrieval import EMBED_CHARS, POOL, cached_embeddings
+    texts = [c.text for c in chunks]
+    dense = Dense(cached_embeddings(CFG.name, [t[:EMBED_CHARS] for t in texts]))
+    bm, rer = BM25(texts), Reranker()
+    qv = llm.embed([q["question"] for q in missing], task="RETRIEVAL_QUERY")
+    for q, v in zip(missing, qv):
+        b, d = bm.search(q["question"], 50), dense.search(v, 50)
+        h = rrf([b, d])
+        hr = rer.rerank(q["question"], texts, h[:POOL], top=20)
+        for name, ranked in (("bm25", b), ("dense", d), ("hybrid", h), ("hybrid_rerank", hr)):
+            runs[name][q["id"]] = [chunks[i].chunk_id for i in ranked[:10]]
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     qs = load_questions(("numeric", "text", "unanswerable"))
@@ -49,6 +66,10 @@ def main():
     by_id = {c.chunk_id: c for c in chunks}
     runs = {r: {x["id"]: x["top"] for x in json.loads((ROOT / "results" / "retrieval" / f"{CFG.name}__{r}.json").read_text())}
             for r in ("bm25", "dense", "hybrid", "hybrid_rerank")}
+    missing = [q for q in qs if q["id"] not in runs["dense"]]
+    if missing:
+        print(f"retrieving {len(missing)} questions not in the retrieval experiment", flush=True)
+        fill_missing(missing, runs, chunks)
     # an answer-bearing chunk per answerable question: prefer one the reranker ranked, else the first in the filing
     hit_ids = {}
     for q in qs:
