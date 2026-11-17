@@ -2,7 +2,7 @@ name: answer
 on:
   workflow_dispatch:
     inputs:
-      step: {description: "generation, judge, or both", default: both}
+      step: {description: "generation, judge, both, or probes", default: both}
 permissions: {contents: write}
 jobs:
   run:
@@ -19,10 +19,13 @@ jobs:
           path: data/index
           key: emb-v1-none
           restore-keys: emb-v1-
-      - if: inputs.step != 'judge'
+      - if: inputs.step == 'probes'
+        run: PYTHONPATH=src python -m rag_eval.run_judge --probes
+        env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"}
+      - if: inputs.step == 'generation' || inputs.step == 'both'
         run: PYTHONPATH=src python -m rag_eval.run_generation
         env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}", GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}"}
-      - if: inputs.step != 'generation'
+      - if: inputs.step == 'judge' || inputs.step == 'both'
         run: PYTHONPATH=src python -m rag_eval.run_judge
         env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"}
       - name: Commit results

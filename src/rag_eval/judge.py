@@ -53,17 +53,23 @@ def judge(question: str, reference: str, excerpts: list[str], answer: str, model
     return parse_verdict(out)
 
 
-def corrupt_number(answer: str, rng: random.Random) -> str | None:
-    """Change the first multi-digit number in an answer by 10-30%, keeping its format. Used to make known-wrong answers."""
-    m = re.search(r"\d[\d,]*\.?\d*", answer)
-    if not m or len(re.sub(r"\D", "", m.group(0))) < 2:
+def _forms(v: float, unit: str) -> list[tuple[str, str]]:
+    """(format spec, kind) pairs for how a value is written: '478,834', '478834', '478.8 billion', '8.98'."""
+    if unit == "dollars per share":
+        return [(f"{abs(v):.2f}", "eps")]
+    return [(f"{abs(v):,.0f}", "comma"), (f"{abs(v):.0f}", "plain"), (f"{abs(v) / 1000:,.1f} billion", "bn")]
+
+
+def corrupt_answer(answer: str, gold: float, unit: str, factor: float) -> str | None:
+    """Replace every printed form of the true value (prose and the ANSWER line) with a value off by `factor`.
+    Returns None if the true value is not found, so a probe is never accidentally still correct."""
+    wrong = gold * factor
+    out = answer
+    for (g, kind), (w, _) in zip(_forms(gold, unit), _forms(wrong, unit)):
+        out = out.replace(g, w)
+    if out == answer or any(g in out for g, _ in _forms(gold, unit)):
         return None
-    raw = m.group(0)
-    v = float(raw.replace(",", ""))
-    nv = v * rng.choice([0.7, 0.8, 0.9, 1.1, 1.2, 1.3])
-    dec = len(raw.split(".")[1]) if "." in raw else 0
-    new = f"{nv:,.{dec}f}" if "," in raw else f"{nv:.{dec}f}"
-    return answer[: m.start()] + new + answer[m.end():]
+    return out
 
 
 def agreement(pairs: list[tuple[bool, bool]]) -> dict:

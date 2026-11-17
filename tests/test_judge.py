@@ -7,11 +7,13 @@ def test_parse_verdict():
     assert J.parse_verdict('{"correct": "yes", "supported": true}') is None and J.parse_verdict("nope") is None
 
 
-def test_corrupt_number_changes_value_keeps_format():
-    rng = random.Random(0)
-    out = J.corrupt_number("Revenue was $303,154 million [1].\nANSWER: 303154", rng)
-    assert out is not None and "303,154" not in out.split("\n")[0] and "," in out.split("\n")[0]
-    assert J.corrupt_number("No digits here", rng) is None
+def test_corrupt_answer_changes_every_form_of_the_value_but_not_dates():
+    a = "Apple's net sales for the fiscal year ended September 26, 2026 were $478,834 million ($478.8 billion) [4].\n\nANSWER: 478834"
+    c = J.corrupt_answer(a, 478834.0, "millions", 1.2)
+    assert c is not None and "478,834" not in c and "478834" not in c and "478.8 billion" not in c
+    assert "September 26, 2026" in c and "ANSWER: 574601" in c
+    assert J.corrupt_answer("ANSWER: 8.98 per share", 8.98, "dollars per share", 0.8) == "ANSWER: 7.18 per share"
+    assert J.corrupt_answer("NOT_FOUND", 5.0, "millions", 1.2) is None   # nothing to corrupt -> no probe
 
 
 def test_agreement_and_kappa_by_hand():
