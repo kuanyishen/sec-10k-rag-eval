@@ -1,0 +1,29 @@
+name: answer
+on:
+  workflow_dispatch:
+    inputs:
+      step: {description: "generation, judge, or both", default: both}
+permissions: {contents: write}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install anthropic rank-bm25 lxml pyyaml numpy
+      - if: inputs.step != 'judge'
+        run: PYTHONPATH=src python -m rag_eval.run_generation
+        env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"}
+      - if: inputs.step != 'generation'
+        run: PYTHONPATH=src python -m rag_eval.run_judge
+        env: {ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}"}
+      - name: Commit results
+        run: |
+          git config user.name "Sky Shen"
+          git config user.email "noreply@github.com"
+          git add results
+          git commit -m "Generation and judge results" || echo "nothing new"
+          git pull --rebase
+          git push
