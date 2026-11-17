@@ -4,6 +4,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -17,9 +18,21 @@ from .retrieve import BM25, Dense, Reranker, rrf
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "results" / "retrieval"
 CONFIGS = [ChunkCfg(400, 50, True), ChunkCfg(400, 50, False), ChunkCfg(150, 25, True), ChunkCfg(800, 100, True)]
-RETRIEVERS = ["bm25", "dense", "hybrid", "hybrid_rerank", "hybrid_oracle_company"]
+RETRIEVERS = ["bm25", "dense", "hybrid", "dense_rerank", "hybrid_rerank", "hybrid_oracle_company"]
 POOL = 30        # candidates handed to the reranker
 EMBED_CHARS = 5500
+
+
+def cached_embeddings(name: str, texts: list[str]) -> np.ndarray:
+    """Embeddings are deterministic for a given text, so keep them between runs (GitHub cache)."""
+    key = hashlib.sha256("\x00".join(texts).encode()).hexdigest()[:16]
+    f = ROOT / "data" / "index" / f"{name}_{key}.npy"
+    if f.exists():
+        return np.load(f)
+    v = np.array(llm.embed(texts, task="RETRIEVAL_DOCUMENT"), dtype=np.float32)
+    f.parent.mkdir(parents=True, exist_ok=True)
+    np.save(f, v)
+    return v
 
 
 def main():
@@ -27,6 +40,7 @@ def main():
     qs = load_questions()
     print(len(qs), "questions")
     qvecs = np.array(llm.embed([q["question"] for q in qs], task="RETRIEVAL_QUERY"))
+    print("query embeddings done", flush=True)
     reranker = Reranker()
     summary = {}
     for cfg in CONFIGS:
@@ -34,7 +48,7 @@ def main():
         texts = [c.text for c in chunks]
         tickers = np.array([c.ticker for c in chunks])
         print(cfg.name, len(chunks), "chunks")
-        dense = Dense(np.array(llm.embed([t[:EMBED_CHARS] for t in texts], task="RETRIEVAL_DOCUMENT")))
+        dense = Dense(cached_embeddings(cfg.name, [t[:EMBED_CHARS] for t in texts]))
         bm = BM25(texts)
         # which chunks hold the answer, per question (independent of the retriever)
         hits = [[M.is_hit(c.ticker, c.body, q) for c in chunks] for q in qs]
@@ -45,8 +59,9 @@ def main():
             b, d = bm.search(q["question"], 50), dense.search(qvecs[qi], 50)
             h = rrf([b, d])
             rr_ = reranker.rerank(q["question"], texts, h[:POOL], top=20)
+            dr = reranker.rerank(q["question"], texts, d[:POOL], top=20)
             ho = rrf([bm.search(q["question"], 50, allowed), dense.search(qvecs[qi], 50, allowed)])
-            for name, ranked in (("bm25", b), ("dense", d), ("hybrid", h), ("hybrid_rerank", rr_), ("hybrid_oracle_company", ho)):
+            for name, ranked in (("bm25", b), ("dense", d), ("hybrid", h), ("dense_rerank", dr), ("hybrid_rerank", rr_), ("hybrid_oracle_company", ho)):
                 runs[name].append({"id": q["id"], "rank": M.first_hit_rank(ranked, hits[qi]),
                                    "top": [chunks[i].chunk_id for i in ranked[:10]]})
         summary[cfg.name] = {"n_chunks": len(chunks), "reachable": float(np.mean(reachable)), "retrievers": {}}
@@ -61,7 +76,8 @@ def main():
                 row[f"mrr_{t}"] = M.boot_ci(M.rr([ranks[i] for i in idx]))
             summary[cfg.name]["retrievers"][name] = row
             (OUT / f"{cfg.name}__{name}.json").write_text(json.dumps(runs[name]))
-            print(f"  {name:24s} recall@5 {row['recall@5'][0]:.3f}  mrr {row['mrr'][0]:.3f}")
+            print(f"  {name:24s} recall@5 {row['recall@5'][0]:.3f}  mrr {row['mrr'][0]:.3f}", flush=True)
+        (ROOT / "results" / "retrieval_summary.json").write_text(json.dumps(summary, indent=1))  # save as we go
     (ROOT / "results" / "retrieval_summary.json").write_text(json.dumps(summary, indent=1))
     print("usage:", llm.USAGE)
 

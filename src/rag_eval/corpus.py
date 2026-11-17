@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from datetime import date
 from pathlib import Path
 
 import yaml
@@ -19,7 +20,8 @@ def build(cfg: ChunkCfg) -> list[Chunk]:
     for c in companies:
         t = c["ticker"]
         blocks = blocks_from_html((ROOT / "data" / "raw" / f"{t}_10k.htm").read_bytes())
-        out += chunk_blocks(blocks, t, f"{c['short']} | fiscal year ended {man[t]['report_date']}", cfg)
+        end = date.fromisoformat(man[t]["report_date"]).strftime("%B %-d, %Y")   # same style as the questions
+        out += chunk_blocks(blocks, t, f"{c['short']} 10-K, fiscal year ended {end}", cfg)
     return out
 
 

@@ -54,14 +54,17 @@ def embed(texts: list[str], *, task: str, model: str = "gemini-embedding-001", d
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     out: list[list[float]] = []
     for i in range(0, len(texts), 50):
-        for attempt in range(6):
+        last = None
+        for attempt in range(8):
             try:
                 r = client.models.embed_content(model=model, contents=texts[i:i + 50],
                                                 config=types.EmbedContentConfig(task_type=task, output_dimensionality=dim))
                 break
-            except Exception:  # rate limit / transient
-                time.sleep(2 ** attempt)
+            except Exception as e:  # rate limit / transient: back off, but say why
+                last = e
+                print(f"  embed batch {i // 50}: {type(e).__name__}: {str(e)[:160]} (retry {attempt + 1})", flush=True)
+                time.sleep(min(90, 5 * 2 ** attempt))
         else:
-            raise RuntimeError("embedding failed after retries")
+            raise RuntimeError(f"embedding failed after retries: {last}")
         out.extend(e.values for e in r.embeddings)
     return out
