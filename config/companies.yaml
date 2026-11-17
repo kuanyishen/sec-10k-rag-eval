@@ -1,16 +1,16 @@
 # Ten large US companies across sectors. The collector checks each CIK's registered name
 # against `expect` and stops on a mismatch, so a wrong CIK cannot silently feed bad data.
 companies:
-  - {ticker: AAPL, cik: 320193,  expect: "Apple",            sector: Technology}
-  - {ticker: MSFT, cik: 789019,  expect: "MICROSOFT",        sector: Technology}
-  - {ticker: JPM,  cik: 19617,   expect: "JPMORGAN",         sector: Banking}
-  - {ticker: WMT,  cik: 104169,  expect: "Walmart",          sector: Retail}
-  - {ticker: PFE,  cik: 78003,   expect: "Pfizer",           sector: Healthcare}
-  - {ticker: XOM,  cik: 34088,   expect: "Exxon",            sector: Energy}
-  - {ticker: TSLA, cik: 1318605, expect: "Tesla",            sector: Automotive}
-  - {ticker: COST, cik: 909832,  expect: "Costco",           sector: Retail}
-  - {ticker: NKE,  cik: 320187,  expect: "NIKE",             sector: Consumer}
-  - {ticker: DAL,  cik: 27904,   expect: "Delta",            sector: Airlines}
+  - {ticker: AAPL, short: "Apple", cik: 320193,  expect: "Apple",            sector: Technology}
+  - {ticker: MSFT, short: "Microsoft", cik: 789019,  expect: "MICROSOFT",        sector: Technology}
+  - {ticker: JPM, short: "JPMorgan Chase",  cik: 19617,   expect: "JPMORGAN",         sector: Banking}
+  - {ticker: WMT, short: "Walmart",  cik: 104169,  expect: "Walmart",          sector: Retail}
+  - {ticker: PFE, short: "Pfizer",  cik: 78003,   expect: "Pfizer",           sector: Healthcare}
+  - {ticker: XOM, short: "ExxonMobil",  cik: 34088,   expect: "Exxon",            sector: Energy}
+  - {ticker: TSLA, short: "Tesla", cik: 1318605, expect: "Tesla",            sector: Automotive}
+  - {ticker: COST, short: "Costco", cik: 909832,  expect: "Costco",           sector: Retail}
+  - {ticker: NKE, short: "Nike",  cik: 320187,  expect: "NIKE",             sector: Consumer}
+  - {ticker: DAL, short: "Delta Air Lines",  cik: 27904,   expect: "Delta",            sector: Airlines}
 # XBRL concepts kept as ground truth for numeric questions (first one found per company wins).
 concepts:
   revenue: [Revenues, RevenueFromContractWithCustomerExcludingAssessedTax, SalesRevenueNet]
