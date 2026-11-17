@@ -1,0 +1,251 @@
+{
+ "revenue": {
+  "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": "2023-07-01",
+    "val": 245122000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": "2024-07-01",
+    "val": 281724000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": "2025-07-01",
+    "val": 331839000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "net_income": {
+  "concept": "NetIncomeLoss",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": "2023-07-01",
+    "val": 88136000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": "2024-07-01",
+    "val": 101832000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": "2025-07-01",
+    "val": 133749000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "operating_income": {
+  "concept": "OperatingIncomeLoss",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": "2023-07-01",
+    "val": 109433000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": "2024-07-01",
+    "val": 128528000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": "2025-07-01",
+    "val": 155237000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "total_assets": {
+  "concept": "Assets",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2025-06-30",
+    "start": null,
+    "val": 619003000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": null,
+    "val": 758376000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "total_liabilities": {
+  "concept": "Liabilities",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2025-06-30",
+    "start": null,
+    "val": 275524000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": null,
+    "val": 315989000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "stockholders_equity": {
+  "concept": "StockholdersEquity",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": null,
+    "val": 268477000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": null,
+    "val": 343479000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": null,
+    "val": 442387000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "cash": {
+  "concept": "CashAndCashEquivalentsAtCarryingValue",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2025-06-30",
+    "start": null,
+    "val": 30242000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": null,
+    "val": 20935000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "operating_cash_flow": {
+  "concept": "NetCashProvidedByUsedInOperatingActivities",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": "2023-07-01",
+    "val": 118548000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": "2024-07-01",
+    "val": 136162000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": "2025-07-01",
+    "val": 182935000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "diluted_eps": {
+  "concept": "EarningsPerShareDiluted",
+  "unit": "USD/shares",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": "2023-07-01",
+    "val": 11.8,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": "2024-07-01",
+    "val": 13.64,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": "2025-07-01",
+    "val": 17.95,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "rd_expense": {
+  "concept": "ResearchAndDevelopmentExpense",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-06-30",
+    "start": "2023-07-01",
+    "val": 29510000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-06-30",
+    "start": "2024-07-01",
+    "val": 32488000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-06-30",
+    "start": "2025-07-01",
+    "val": 35562000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ }
+}

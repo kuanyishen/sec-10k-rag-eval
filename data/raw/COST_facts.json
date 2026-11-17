@@ -1,0 +1,238 @@
+{
+ "revenue": {
+  "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-09-01",
+    "start": "2023-09-04",
+    "val": 254453000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": "2024-09-02",
+    "val": 275235000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": "2025-09-01",
+    "val": 303154000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "net_income": {
+  "concept": "NetIncomeLoss",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-09-01",
+    "start": "2023-09-04",
+    "val": 7367000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": "2024-09-02",
+    "val": 8099000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": "2025-09-01",
+    "val": 9226000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "operating_income": {
+  "concept": "OperatingIncomeLoss",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-09-01",
+    "start": "2023-09-04",
+    "val": 9285000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": "2024-09-02",
+    "val": 10383000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": "2025-09-01",
+    "val": 11685000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "total_assets": {
+  "concept": "Assets",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-09-01",
+    "start": null,
+    "val": 69831000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": null,
+    "val": 77099000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": null,
+    "val": 89045000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "total_liabilities": {
+  "concept": "Liabilities",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2025-08-31",
+    "start": null,
+    "val": 47935000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": null,
+    "val": 53242000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "stockholders_equity": {
+  "concept": "StockholdersEquity",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2023-09-03",
+    "start": null,
+    "val": 25058000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-09-01",
+    "start": null,
+    "val": 23622000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": null,
+    "val": 29164000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": null,
+    "val": 35803000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "cash": {
+  "concept": "CashAndCashEquivalentsAtCarryingValue",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2025-08-31",
+    "start": null,
+    "val": 14161000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": null,
+    "val": 20207000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "operating_cash_flow": {
+  "concept": "NetCashProvidedByUsedInOperatingActivities",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-09-01",
+    "start": "2023-09-04",
+    "val": 11339000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": "2024-09-02",
+    "val": 13335000000,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": "2025-09-01",
+    "val": 15817000000,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ },
+ "diluted_eps": {
+  "concept": "EarningsPerShareDiluted",
+  "unit": "USD/shares",
+  "rows": [
+   {
+    "end": "2024-09-01",
+    "start": "2023-09-04",
+    "val": 16.56,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-08-31",
+    "start": "2024-09-02",
+    "val": 18.21,
+    "fy": 2026,
+    "fp": "FY"
+   },
+   {
+    "end": "2026-08-30",
+    "start": "2025-09-01",
+    "val": 20.76,
+    "fy": 2026,
+    "fp": "FY"
+   }
+  ]
+ }
+}

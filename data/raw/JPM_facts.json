@@ -1,0 +1,184 @@
+{
+ "revenue": {
+  "concept": "Revenues",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2023-12-31",
+    "start": "2023-01-01",
+    "val": 158104000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-12-31",
+    "start": "2024-01-01",
+    "val": 177556000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": "2025-01-01",
+    "val": 182447000000,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ },
+ "net_income": {
+  "concept": "NetIncomeLoss",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2023-12-31",
+    "start": "2023-01-01",
+    "val": 49552000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-12-31",
+    "start": "2024-01-01",
+    "val": 58471000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": "2025-01-01",
+    "val": 57048000000,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ },
+ "total_assets": {
+  "concept": "Assets",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2023-12-31",
+    "start": null,
+    "val": 3875393000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-12-31",
+    "start": null,
+    "val": 4002814000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": null,
+    "val": 4424900000000,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ },
+ "total_liabilities": {
+  "concept": "Liabilities",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2024-12-31",
+    "start": null,
+    "val": 3658056000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": null,
+    "val": 4062462000000,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ },
+ "stockholders_equity": {
+  "concept": "StockholdersEquity",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2023-12-31",
+    "start": null,
+    "val": 327878000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-12-31",
+    "start": null,
+    "val": 344758000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": null,
+    "val": 362438000000,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ },
+ "operating_cash_flow": {
+  "concept": "NetCashProvidedByUsedInOperatingActivities",
+  "unit": "USD",
+  "rows": [
+   {
+    "end": "2023-12-31",
+    "start": "2023-01-01",
+    "val": 12974000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-12-31",
+    "start": "2024-01-01",
+    "val": -42012000000,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": "2025-01-01",
+    "val": -147782000000,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ },
+ "diluted_eps": {
+  "concept": "EarningsPerShareDiluted",
+  "unit": "USD/shares",
+  "rows": [
+   {
+    "end": "2023-12-31",
+    "start": "2023-01-01",
+    "val": 16.23,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2024-12-31",
+    "start": "2024-01-01",
+    "val": 19.75,
+    "fy": 2025,
+    "fp": "FY"
+   },
+   {
+    "end": "2025-12-31",
+    "start": "2025-01-01",
+    "val": 20.02,
+    "fy": 2025,
+    "fp": "FY"
+   }
+  ]
+ }
+}
